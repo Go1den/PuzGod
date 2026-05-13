@@ -1,3 +1,7 @@
+body {
+  user-select: none;
+}
+
 .cw-title,
 .cw-author {
     flex: 0 1 auto;
