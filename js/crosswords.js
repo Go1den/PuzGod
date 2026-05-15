@@ -2070,7 +2070,7 @@ const CONFIGURABLE_SETTINGS = [
                 }
               }
 
-              if (next_cell) {
+              if (next_cell && !this.selected_word.isFilled()) {
                 this.setActiveCell(next_cell);
               }
             }
