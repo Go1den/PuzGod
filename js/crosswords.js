@@ -405,6 +405,11 @@ const CONFIGURABLE_SETTINGS = [
           root.style.setProperty("--clue-passive-color", cluePassiveColor);
           setContrastText("--clue-passive-text-color", cluePassiveColor);
 
+          // Associated clues (same as grid highlight usually)
+          const clueAssociatedColor = Color.applyHsvTransform(wordColor, { dh: -2.64, ks: 0.536, kv: 0.976 });
+          root.style.setProperty("--clue-associated-color", clueAssociatedColor);
+          setContrastText("--clue-associated-text-color", clueAssociatedColor);
+
           const topTextBgColor = Color.applyHsvTransform(wordColor, { dh: -8.62, ks: 0.157, kv: 1.004 });
           root.style.setProperty("--top-text-wrapper-bg-color", '#FFD700');
           setContrastText("--top-text-wrapper-text-color", topTextBgColor);
@@ -1406,7 +1411,29 @@ const CONFIGURABLE_SETTINGS = [
             </span>
           `);
           resizeText(this.root, this.top_text);
+          this.setAssociated(word);
         }
+      }
+
+      setAssociated(word) {
+        const allClues = this.root.find('div.cw-clue');
+        allClues.each((index, clueEl) => {
+          const $clueEl = $(clueEl);
+          const wordId = $clueEl.data('word');
+          const refWord = this.words[wordId];
+          if (refWord) {
+            const direction = this.isAcross(refWord.cell_ranges) ? 'Across' : 'Down';
+            const clueRef = `${refWord.clue.number}-${direction}`;
+            const isDirectReference = word.references.includes(clueRef);
+            const isStarredTheme = (word.clue.starred && refWord.clue.starredTheme)
+                                || (word.clue.starredTheme && refWord.clue.starred);
+            if (isDirectReference || isStarredTheme) {
+              $clueEl.addClass('associated');
+            } else {
+              $clueEl.removeClass('associated');
+            }
+          }
+        });
       }
 
       setActiveCell(cell) {

@@ -24,6 +24,8 @@ This file contains shared styles always loaded
     --clue-active-text-color: #000000;
     --clue-passive-color: #c3c3c3;
     --clue-passive-text-color: #000000;
+    --clue-associated-color: #FFECA0;
+    --clue-associated-text-color: #000000;
     --clue-hover-color: #c3c3c3;
     --cluenote-text-color: #000000;
     --cluenote-hilite-color: #71706e;
