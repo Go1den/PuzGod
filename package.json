@@ -1,7 +1,7 @@
 {
   "name": "PuzGod",
   "productName": "PuzGod",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Offline Crossword Solver for .puz files",
   "homepage": "https://github.com/Go1den/html5-crossword-solver#readme",
   "bugs": {
