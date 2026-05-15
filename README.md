@@ -15,6 +15,3 @@ Rebus entries
 Acrostic  
 Diagramless  
 Coded
-
-## Print Functionality
-The solver includes a "Print" option in the File menu, which utilizes `jsPDF` (bundled within `jscrossword_combined.js`) to generate a printable PDF version of the crossword. This feature allows users to print the current state of the puzzle directly from their browser.
