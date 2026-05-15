@@ -66,6 +66,80 @@
             });
           }
         }, 350);
+
+        // Listen for print-puzzle IPC event from Electron menu
+        if (window.electronAPI) {
+          window.electronAPI.onInfo(() => {
+            if (window.gCrossword && typeof window.gCrossword.showInfo === 'function') {
+              window.gCrossword.showInfo();
+            }
+          });
+          window.electronAPI.onNotepad(() => {
+            if (window.gCrossword && typeof window.gCrossword.showNotepad === 'function') {
+              window.gCrossword.showNotepad();
+            }
+          });
+          window.electronAPI.onOpen(() => {
+            if (window.gCrossword && typeof window.gCrossword.loadPuzzle === 'function') {
+              window.gCrossword.loadPuzzle();
+            }
+          });
+          window.electronAPI.onPrintPuzzle(() => {
+            if (window.gCrossword && typeof window.gCrossword.printPuzzle === 'function') {
+              window.gCrossword.printPuzzle();
+            }
+          });
+          window.electronAPI.onSaveAs(() => {
+            if (window.gCrossword && typeof window.gCrossword.saveAsIpuz === 'function') {
+              window.gCrossword.saveAsIpuz();
+            }
+          });
+          window.electronAPI.onSettings(() => {
+            if (window.gCrossword && typeof window.gCrossword.openSettings === 'function') {
+              window.gCrossword.openSettings();
+            }
+          });
+          window.electronAPI.onRestart(() => {
+            if (window.gCrossword && typeof window.gCrossword.clearPuzzle === 'function') {
+              window.gCrossword.clearPuzzle();
+            }
+          });
+          window.electronAPI.onCheckLetter(() => {
+            if (window.gCrossword && typeof window.gCrossword.checkLetter === 'function') {
+              window.gCrossword.checkLetter();
+            }
+          });
+          window.electronAPI.onCheckWord(() => {
+            if (window.gCrossword && typeof window.gCrossword.checkWord === 'function') {
+              window.gCrossword.checkWord();
+            }
+          });
+          window.electronAPI.onCheckPuzzle(() => {
+            if (window.gCrossword && typeof window.gCrossword.checkPuzzle === 'function') {
+              window.gCrossword.checkPuzzle();
+            }
+          });
+          window.electronAPI.onRevealLetter(() => {
+            if (window.gCrossword && typeof window.gCrossword.revealLetter === 'function') {
+              window.gCrossword.revealLetter();
+            }
+          });
+          window.electronAPI.onRevealWord(() => {
+            if (window.gCrossword && typeof window.gCrossword.revealWord === 'function') {
+              window.gCrossword.revealWord();
+            }
+          });
+          window.electronAPI.onRevealPuzzle(() => {
+            if (window.gCrossword && typeof window.gCrossword.revealPuzzle === 'function') {
+              window.gCrossword.revealPuzzle();
+            }
+          });
+          window.electronAPI.onRebus(() => {
+            if (window.gCrossword && typeof window.gCrossword.prepareRebus === 'function') {
+              window.gCrossword.prepareRebus();
+            }
+          });
+        }
       };
 
       window.addEventListener('DOMContentLoaded', () => {

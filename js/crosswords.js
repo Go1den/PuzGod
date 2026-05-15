@@ -880,6 +880,33 @@ const CONFIGURABLE_SETTINGS = [
         });
       }
 
+      resetTimer() {
+        // Stop timer
+        if (xw_timer) {
+          clearTimeout(xw_timer);
+          xw_timer = null;
+        }
+        this.timer_running = false;
+        this.xw_timer_seconds = 0;
+        xw_timer_seconds = 0;
+
+        // Start the timer if necessary
+        if (this.config.timer_autostart) {
+          this.toggleTimer();
+        }
+      }
+
+      selectFirstCell() {
+        const first_word = this.clueGroups[this.activeClueGroupIndex].getFirstWord?.();
+        if (first_word) {
+          this.setActiveWord(first_word);
+          const firstCell = first_word.getFirstCell?.();
+          if (firstCell) {
+            this.setActiveCell(firstCell);
+          }
+        }
+      }
+
       completeLoad() {
         $('.cw-header').html(`
           <table>
@@ -982,19 +1009,7 @@ const CONFIGURABLE_SETTINGS = [
         this.renderCells();
         this.styleClues();
 
-        const first_word = this.clueGroups[this.activeClueGroupIndex].getFirstWord?.();
-        if (first_word) {
-          this.setActiveWord(first_word);
-          const firstCell = first_word.getFirstCell?.();
-          if (firstCell) {
-            this.setActiveCell(firstCell);
-          }
-        }
-
-        // Start the timer if necessary
-        if (this.config.timer_autostart) {
-          this.toggleTimer();
-        }
+        this.selectFirstCell();
 
         // and whenever window resizes
         window.removeEventListener('resize', this.updateClueLayout);
@@ -1005,8 +1020,9 @@ const CONFIGURABLE_SETTINGS = [
           this.updateClueLayout();
           this.windowResized();
         }, 100);
-
-      } // end completeLoad
+        
+        this.resetTimer();
+      }
 
       updateClueLayout() {
         /** Some JS magic to deal with weird numbers of clue lists **/
@@ -1097,6 +1113,14 @@ const CONFIGURABLE_SETTINGS = [
         }
       }
 
+      loadPuzzle(e) {
+        // Re-initialize to a clean state
+        this.init();
+        // Reset file input value to allow opening the same file again
+        this.file_input.val('');
+        this.file_input.click();
+      }
+
       addListeners() {
         $(window).off('click', this.handleClickWindow);
         $(window).on('click', this.handleClickWindow);
@@ -1169,13 +1193,7 @@ const CONFIGURABLE_SETTINGS = [
         this.save_btn.on('click', $.proxy(this.saveAsIpuz, this));
 
         // LOAD
-        this.load_btn.on('click', () => {
-          // Re-initialize to a clean state
-          this.init();
-          // Reset file input value to allow opening the same file again
-          this.file_input.val('');
-          this.file_input.click();
-        });
+        this.load_btn.on('click', $.proxy(this.loadPuzzle, this));
 
         // TIMER
         this.timer_button.on('click', $.proxy(this.toggleTimer, this));
@@ -2989,10 +3007,36 @@ const CONFIGURABLE_SETTINGS = [
         var jsxw_cells = JSON.parse(localStorage.getItem(this.savegame_name));
         // don't actually *load* it, just return the jsxw
         return jsxw_cells;
-        //if (jsxw) {
-        //  this.removeListeners();
-        //  this.parsePuzzle(jsxw);
-        //}
+      }
+
+      clearPuzzle(e) {
+        this.check_reveal('puzzle', 'clear', e);
+        this.selectFirstCell();
+        this.resetTimer();
+      }
+
+      checkLetter(e) {
+        this.check_reveal('letter', 'check', e);
+      }
+
+      checkWord(e) {
+        this.check_reveal('word', 'check', e);
+      }
+
+      checkPuzzle(e) {
+        this.check_reveal('puzzle', 'check', e);
+      }
+
+      revealLetter(e) {
+        this.check_reveal('letter', 'reveal', e);
+      }
+
+      revealWord(e) {
+        this.check_reveal('word', 'reveal', e);
+      }
+
+      revealPuzzle(e) {
+        this.check_reveal('puzzle', 'reveal', e);
       }
 
       check_reveal(to_solve, reveal_or_check, e) {
