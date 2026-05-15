@@ -1,0 +1,43 @@
+Input: Kiss ___ (jumbotron smooch spotter)
+Expected: Kiss ___ (jumbotron smooch spotter)
+Actual: Kiss ___ (jumbotron smooch spotter)
+
+Input: Input: Young, willing, and ___
+Expected: Young, willing, and ___
+Actual: Young, willing, and ___
+
+Input: _3:10 to ____ (classic Western film)
+Expected: <i>3:10 to ___</i> (classic Western film)
+Actual: <i>3:10 to ___</i> (classic Western film)
+
+Input: "Woman in Mood for ___ Cooked Meal Made by Somebody Else" (_Reductress_ headline)
+Expected: "Woman in Mood for ___ Cooked Meal Made by Somebody Else" (<i>Reductress</i> headline)
+Actual: "Woman in Mood for ___ Cooked Meal Made by Somebody Else" (_Reductress_ headline)
+
+Input: ___ Yar, Chief of Security on the first season of _Star Trek: The Next Generation_
+Expected: ___ Yar, Chief of Security on the first season of <i>Star Trek: The Next Generation</i>
+Actual: ___ Yar, Chief of Security on the first season of <i>Star Trek: The Next Generation</i>
+
+Input: _Much ___ About Nothing_
+Expected: <i>Much ___ About Nothing</i>
+Actual: <i>Much ___ About Nothing</i>
+
+Input: "People Don't Throw Shoes at Political Leaders Like They ___ To" (_Reductress_ headline)
+Expected: "People Don't Throw Shoes at Political Leaders Like They ___ To" (<i>Reductress</i> headline)
+Actual: "People Don't Throw Shoes at Political Leaders Like They ___ To" (_Reductress_ headline)
+
+Input: "People Don't Throw Shoes at Political Leaders Like They ___ To" ("_Reductress_" headline)
+Expected: "People Don't Throw Shoes at Political Leaders Like They ___ To" ("<i>Reductress</i>" headline)
+Actual: "People Don't Throw Shoes at Political Leaders Like They ___ To" ("_Reductress_" headline)
+
+Input: _Wicked_ director Jon M. ___
+Expected: <i>Wicked</i> director Jon M. ___
+Actual: <i>Wicked</i> director Jon M. ___
+
+Input: "Her head was up in space / She needed to come back down to ___" ("Sk8er Boi" lyrics)
+Expected: "Her head was up in space / She needed to come back down to ___" ("Sk8er Boi" lyrics)
+Actual: "Her head was up in space / She needed to come back down to ___" ("Sk8er Boi" lyrics)
+
+Input: "You say ___, I say ___" (classic lyric that doesn't really work written down)
+Expected: "You say ___, I say ___" (classic lyric that doesn't really work written down)
+Actual: "You say ___, I say ___" (classic lyric that doesn't really work written down)

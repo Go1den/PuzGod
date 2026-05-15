@@ -1402,34 +1402,11 @@ const CONFIGURABLE_SETTINGS = [
               ${escape(word.clue.number)}${this.isAcross(word.cell_ranges) ? "A" : "D"}
             </span>
             <span class="cw-clue-text">
-              ${escape(word.clue.text)}
+              ${escape(word.clue.sanitizedText)}
             </span>
           `);
           resizeText(this.root, this.top_text);
         }
-      }
-
-      //Todo figure this out
-      replaceUnderscores(text) {
-        // let splits = text.split("_");
-        let last = "";
-        let result = "";
-        for(let i = 0; i < text.length; i++){
-          let char = text.charAt(i);
-          if(char != '_' || char !== last) {
-            result += char;
-            last = char;
-          }
-        }
-        console.log(result);
-
-        let underscores = (text.match(new RegExp("_", "g")) || []).length;
-        if (underscores > 0 && underscores % 2 == 0) {
-          console.log(text);
-          let split = text.split('_');
-          console.log(split);
-        }
-        return text;
       }
 
       setActiveCell(cell) {
@@ -1482,7 +1459,7 @@ const CONFIGURABLE_SETTINGS = [
             <div style="position: relative">
               <span class="cw-clue-number">${escape(clue.number)}</span>
               <span class="cw-clue-text">
-                ${this.replaceUnderscores(escape(clue.text))}
+                ${escape(clue.sanitizedText)}
               </span>
             </div>
           `);

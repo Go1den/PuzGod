@@ -22,6 +22,7 @@ class Word {
         this.dir = data.dir;
         this.cell_ranges = data.cell_ranges;
         this.clue = data.clue;
+        this.clue.sanitizedText = this.sanitizeText(data.clue.text);
         this.clue.starred = data.clue.text.startsWith('*');
         this.clue.starredTheme = data.clue.text.toLowerCase().indexOf('starred clue') !== -1;
         this.references = this.extractClueReferences(data.clue.text);
@@ -30,6 +31,38 @@ class Word {
         load_error = true;
       }
     }
+  }
+
+  sanitizeText(text) {
+    return this.replaceUnderscores(text);
+  }
+
+   replaceUnderscores(text) {
+    const startPattern = /(?:^|[^A-Za-z0-9_])(?<!_)_(?=[^\s_])(?!_)/g;
+    const endPattern = /(?<=[^\s_])(?<!_)_(?!_)(?:[^A-Za-z0-9_]|$)/g;
+    const startCount = (text.match(startPattern) || []).length;
+    const endCount = (text.match(endPattern) || []).length;
+
+    if (startCount === endCount && startCount > 0) {
+      return text
+        .replace(startPattern, m => m.replace('_', '<i>'))
+        .replace(endPattern, m => m.replace('_', '</i>'));
+    }
+    if (startCount > endCount && startCount > 0) {
+      let result = text
+        .replace(startPattern, m => m.replace('_', '<i>'))
+        .replace(endPattern, m => m.replace('_', '</i>'));
+
+      const lastUnderscoreIndex = result.lastIndexOf('_');
+      if (lastUnderscoreIndex !== -1) {
+        result =
+          result.slice(0, lastUnderscoreIndex) +
+          '</i>' +
+          result.slice(lastUnderscoreIndex + 1);
+      }
+      return result;
+    }
+    return text;
   }
 
   extractClueReferences(text) {
