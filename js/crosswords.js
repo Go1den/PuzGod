@@ -136,7 +136,7 @@ const CONFIGURABLE_SETTINGS = [
             <div   class = "cw-puzzle-container">
             <div   class = "cw-top-text-wrapper">
             <div   class = "cw-top-text">
-            <span  class = "cw-clue-number"></span>
+            <span  class = "cw-clue-number top-clue-number"></span>
             <span  class = "cw-clue-text"></span>
                     </div>
                   </div>
@@ -1403,7 +1403,7 @@ const CONFIGURABLE_SETTINGS = [
           this.setSelectedWord(word);
           const group = this.clueGroups[this.activeClueGroupIndex];
           this.top_text.html(`
-            <span class="cw-clue-number">
+            <span class="cw-clue-number top-clue-number">
               ${escape(word.clue.number)}${this.isAcross(word.cell_ranges) ? "A" : "D"}
             </span>
             <span class="cw-clue-text">
@@ -1484,7 +1484,7 @@ const CONFIGURABLE_SETTINGS = [
         for (const clue of clues_group.clues) {
           const clue_el = $(`
             <div style="position: relative">
-              <span class="cw-clue-number">${escape(clue.number)}</span>
+              <span class="cw-clue-number side-clue-number">${escape(clue.number)}</span>
               <span class="cw-clue-text">
                 ${escape(clue.sanitizedText)}
               </span>

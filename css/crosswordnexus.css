@@ -80,6 +80,15 @@ body {
 .cw-clue {
   padding: 6px 0px;
   margin-right: 3px;
+  border-left: 10px solid var(--main-bg-color);
+}
+
+.passive, .active {
+  border-left: 10px solid #FFD700;
+}
+
+.associated {
+  border-left: 10px solid #FFECA0;
 }
 
 /**

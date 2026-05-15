@@ -564,11 +564,19 @@ div.is-dragover {
 .cw-clue-number {
   flex-shrink: 0;
   text-align: right;
-  min-width: 1.7rem;
-  margin-left: 0.3rem;
   margin-right: 0.7rem;
   font-weight: bold;
   font-size: 0.8em;
+}
+
+.top-clue-number {
+  min-width: 1.7rem;
+  margin-left: 0.3rem;
+}
+
+.side-clue-number {
+  min-width: 1.2rem;
+  margin-left: 0.2rem;
 }
 
 .cw-clue-text {
@@ -624,10 +632,9 @@ div.is-dragover {
   color: var(--clue-active-text-color);
 }
 
-.cw-clue.passive .cw-clue-number {
-  background: #FFD700;
-  color: var(--clue-passive-text-color);
-}
+/* .cw-clue {
+  border-left: 10px !important;
+} */
 
 .cw-clue.completed {
   color: gray;
