@@ -472,7 +472,7 @@ const CONFIGURABLE_SETTINGS = [
         this.has_reveal = true;
         this.has_check = true;
         this.is_autofill = false;
-        this.completion_message = "Puzzle solved!";
+        this.completion_message = "<center>Puzzle solved!</center>";
         this.notes = new Map();
 
         // build structures
@@ -919,74 +919,14 @@ const CONFIGURABLE_SETTINGS = [
           <td class="cw-header-right">
           <span class="cw-button-span">
             <div class="cw-buttons-holder">
-      <div class="cw-menu-container">
-          <button type="button" class="cw-button">
-              File
-              <span class="cw-arrow"></span>
-          </button>
-          <div class="cw-menu">
-              <button class="cw-menu-item cw-file-info">Info</button>
-              <button class="cw-menu-item cw-file-notepad">Notepad</button>
-              <button class="cw-menu-item cw-file-load">Open...</button>
-              <button class="cw-menu-item cw-file-print">Print</button>
-              <button class="cw-menu-item cw-file-save">Save as iPuz</button>
-              <button class="cw-menu-item cw-file-clear">Clear</button>
-          </div>
-      </div>
-      <div class="cw-menu-container cw-check">
-          <button type="button" class="cw-button">
-              Check
-              <span class="cw-arrow"></span>
-          </button>
-          <div class="cw-menu">
-              <button class="cw-menu-item cw-check-letter">Letter</button>
-              <button class="cw-menu-item cw-check-word">Word</button>
-              <button class="cw-menu-item cw-check-puzzle">Puzzle</button>
-          </div>
-      </div>
-      <div class="cw-menu-container cw-reveal">
-          <button type="button" class="cw-button">
-              Reveal
-              <span class="cw-arrow"></span>
-          </button>
-          <div class="cw-menu">
-              <button class="cw-menu-item cw-reveal-letter">Letter</button>
-              <button class="cw-menu-item cw-reveal-word">Word</button>
-              <button class="cw-menu-item cw-reveal-puzzle">Puzzle</button>
-          </div>
-      </div>
-      <button type="button" class="cw-button cw-rebus-button">
-          Rebus
-      </button>
-      <button type="button" class="cw-button cw-settings-button">
-          Settings
-      </button>
-      <button type="button" class="cw-button cw-button-timer">00:00</button>
-  </div>
+              <button type="button" class="cw-button cw-button-timer">00:00</button>
+            </div>
           </span>
           </td></tr></table>
-          
         `);
 
         // Reassign button references now that the header HTML has been inserted
-        this.settings_btn = this.root.find('.cw-settings-button');
-        this.info_btn = this.root.find('.cw-file-info');
-        this.load_btn = this.root.find('.cw-file-load');
-        this.print_btn = this.root.find('.cw-file-print');
-        this.clear_btn = this.root.find('.cw-file-clear');
-        this.save_btn = this.root.find('.cw-file-save');
-        this.download_btn = this.root.find('.cw-file-download');
-        this.notepad_btn = this.root.find('.cw-file-notepad');
-        this.rebus_button = this.root.find('.cw-rebus-button');
         this.timer_button = this.root.find('.cw-button-timer');
-        this.reveal_letter = this.root.find('.cw-reveal-letter');
-        this.reveal_word = this.root.find('.cw-reveal-word');
-        this.reveal_puzzle = this.root.find('.cw-reveal-puzzle');
-        this.check_letter = this.root.find('.cw-check-letter');
-        this.check_word = this.root.find('.cw-check-word');
-        this.check_puzzle = this.root.find('.cw-check-puzzle');
-
-        this.notepad_icon = this.root.find('.cw-button-notepad');
 
         (this.clueGroups || []).forEach(group => {
           // Find the container that matches this group’s ID
@@ -1075,26 +1015,7 @@ const CONFIGURABLE_SETTINGS = [
         this.clues_holder.undelegate('div.cw-clues-items span');
         this.svg.off('mousemove click');
 
-        this.reveal_letter.off('click');
-        this.reveal_word.off('click');
-        this.reveal_puzzle.off('click');
-
-        this.check_letter.off('click');
-        this.check_word.off('click');
-        this.check_puzzle.off('click');
-
-        this.print_btn.off('click');
-        this.clear_btn.off('click');
-        this.load_btn.off('click');
-        this.save_btn.off('click');
-        this.download_btn.off('click');
         this.timer_button.off('click');
-        this.rebus_button.off('click');
-        this.settings_btn.off('click');
-
-        this.info_btn.off('click');
-        this.notepad_btn.off('click');
-        this.notepad_icon.off('click');
 
         this.hidden_input.off('input');
         this.hidden_input.off('keydown');
@@ -1152,75 +1073,13 @@ const CONFIGURABLE_SETTINGS = [
 
         this.svg.on('click', $.proxy(this.mouseClicked, this));
 
-        // REVEAL
-        this.reveal_letter.on(
-          'click',
-          $.proxy(this.check_reveal, this, 'letter', 'reveal')
-        );
-        this.reveal_word.on(
-          'click',
-          $.proxy(this.check_reveal, this, 'word', 'reveal')
-        );
-        this.reveal_puzzle.on(
-          'click',
-          $.proxy(this.check_reveal, this, 'puzzle', 'reveal')
-        );
-
-        // CHECK
-        this.check_letter.on(
-          'click',
-          $.proxy(this.check_reveal, this, 'letter', 'check')
-        );
-        this.check_word.on(
-          'click',
-          $.proxy(this.check_reveal, this, 'word', 'check')
-        );
-        this.check_puzzle.on(
-          'click',
-          $.proxy(this.check_reveal, this, 'puzzle', 'check')
-        );
-
-        // PRINTER
-        this.print_btn.on('click', (e) => this.printPuzzle(e));
-
-        // CLEAR
-        this.clear_btn.on(
-          'click',
-          $.proxy(this.check_reveal, this, 'puzzle', 'clear')
-        );
-
-        // SAVE
-        this.save_btn.on('click', $.proxy(this.saveAsIpuz, this));
-
-        // LOAD
-        this.load_btn.on('click', $.proxy(this.loadPuzzle, this));
-
         // TIMER
         this.timer_button.on('click', $.proxy(this.toggleTimer, this));
-
-        // REBUS
-        this.rebus_button.on('click', $.proxy(this.prepareRebus, this));
-
-        // SETTINGS
-        this.settings_btn.on('click', $.proxy(this.openSettings, this));
-
-        // INFO
-        this.info_btn.on('click', $.proxy(this.showInfo, this));
-
-        // NOTEPAD
-        if (this.notepad) {
-          this.notepad_icon.on('click', $.proxy(this.showNotepad, this));
-          this.notepad_btn.show();
-        } else {
-          this.notepad_icon.hide();
-        }
 
         // Automatically show intro on load if it exists
         if (this.jsxw.metadata.intro) {
           setTimeout(() => this.showNotepad(), 300);
         }
-
-        this.notepad_btn.on('click', $.proxy(this.showNotepad, this));
 
         $(document).off('keydown').on('keydown', $.proxy(this.keyPressed, this));
 
