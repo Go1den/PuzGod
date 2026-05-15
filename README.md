@@ -1,5 +1,5 @@
 # PuzGod
-An Electron-wrapped, lightweight version of HTML 5 crossword solver. This can run as a standalone app on your PC. Handles multiple puzzle formats (JPZ, PUZ, iPuz, etc.).
+An Electron-wrapped, lightweight version of HTML 5 crossword solver. This can run as a standalone app on your PC for offline solving. Handles multiple puzzle formats (JPZ, PUZ, iPuz, etc.).
 
 ![PuzGod](images/preview.png)
 
