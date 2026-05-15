@@ -41,4 +41,17 @@ module.exports = {
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
   ],
+  publishers: [
+    {
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: {
+          owner: 'Go1den',
+          name: 'PuzGod'
+        },
+        prerelease: false,
+        draft: true
+      }
+    }
+  ]
 };
