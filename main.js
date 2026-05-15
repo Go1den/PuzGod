@@ -28,6 +28,13 @@ const createWindow = () => {
   // Store reference to main window
   mainWindow = win;
 
+  mainWindow.webContents.setWindowOpenHandler(() => ({
+  action: "allow",
+  overrideBrowserWindowOptions: {
+    autoHideMenuBar: true,
+    menuBarVisible: false
+  }}));
+
   // Create menu
   const template = [
     {

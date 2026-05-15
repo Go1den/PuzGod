@@ -3142,6 +3142,10 @@ const CONFIGURABLE_SETTINGS = [
         this.fillJsXw();
         try {
           let doc = await this.jsxw.toPDF();
+          doc.setProperties({
+              title: "PuzGod"
+            }
+          );
           doc.autoPrint();
           // open in a new tab and trigger print dialog
           const blobUrl = doc.output("bloburl");
