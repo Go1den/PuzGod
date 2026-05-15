@@ -3,6 +3,8 @@ const { app, BrowserWindow, Menu, ipcMain } = require('electron')
 // run this as early in the main process as possible
 if (require('electron-squirrel-startup')) app.quit();
 
+require('update-electron-app')()
+
 app.setAppUserModelId("com.squirrel.PuzGod.PuzGod");
 
 let mainWindow;
